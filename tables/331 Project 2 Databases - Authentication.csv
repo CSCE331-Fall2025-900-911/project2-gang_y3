@@ -1,0 +1,6 @@
+user_id,username,password,role
+1,manager01,pass123,Manager
+2,cashier01,pass234,Cashier
+3,cashier02,pass345,Cashier
+4,cashier03,pass456,Cashier
+5,cashier04,pass567,Cashier
