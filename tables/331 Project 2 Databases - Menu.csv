@@ -1,0 +1,17 @@
+menu_item_id,item_name,category,price,availability,inventory_link
+1,Classic Milk Tea,Milk Tea,4.5,TRUE,"{1:1,17:1,18:1}"
+2,Taro Milk Tea,Milk Tea,4.75,TRUE,"{2:1,17:1,18:1}"
+3,Thai Milk Tea,Milk Tea,4.75,TRUE,"{3:1,17:1,18:1}"
+4,Strawberry Fruit Tea,Fruit Tea,4.25,TRUE,"{4:1,17:1,18:1}"
+5,Mango Fruit Tea,Fruit Tea,4.25,TRUE,"{5:1,17:1,18:1}"
+6,Lychee Fruit Tea,Fruit Tea,4.25,TRUE,"{6:1,17:1,18:1}"
+7,Matcha Latte,Specialty Drinks,5.25,TRUE,"{7:1,17:1,18:1}"
+8,Brown Sugar Boba,Specialty Drinks,5.5,TRUE,"{8:1,17:1,18:1}"
+9,Strawberry Smoothie,Smoothies,5.75,TRUE,"{9:1,17:1,19:1}"
+10,Mango Smoothie,Smoothies,5.75,TRUE,"{10:1,17:1,19:1}"
+11,Lychee Smoothie,Smoothies,5.75,TRUE,"{11:1,17:1,19:1}"
+12,Egg Puff,Snacks/Desserts,4,TRUE,{12:1}
+13,Taiyaki,Snacks/Desserts,4.25,TRUE,{13:1}
+14,Popcorn Chicken,Snacks/Desserts,5.5,TRUE,{14:1}
+15,Honey Green Tea,Fruit Tea,4.25,TRUE,"{15:1,17:1,19:1}"
+16,Wintermelon Milk Tea,Milk Tea,4.75,TRUE,"{16:1,17:1,19:1}"
