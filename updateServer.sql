@@ -39,6 +39,7 @@ CREATE TABLE Menu (
 CREATE TABLE Orders (
     order_id INTEGER PRIMARY KEY,
     order_date DATE NOT NULL,
+    order_time TIME,
     total_amount DECIMAL(10,2) NOT NULL,
     payment_method VARCHAR(20) NOT NULL,
     order_status VARCHAR(20) NOT NULL,
