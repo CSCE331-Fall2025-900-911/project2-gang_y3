@@ -2,7 +2,7 @@
 -- about: given a specific day, what was the sum of the top 10 order totals?
 -- example: "30 August has $12345 of top sales"
 
-SELECT order_date::date AS date, SUM(order_total) AS total
+SELECT order_date::date AS date, SUM(total_amount) AS total
 FROM Orders
 GROUP BY date
 ORDER BY total DESC
