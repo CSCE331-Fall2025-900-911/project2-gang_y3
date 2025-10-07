@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Order Summary</h1>
+    </header>
+    <div class="container">
+        <div class="sidebar" style="width:100%">
+            <div id="orderList"></div>
+            <button class="add-btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+    <script>
+        let order = JSON.parse(localStorage.getItem("order") || "[]");
+        let html = "";
+        order.forEach(item => {
+            html += `<div class="order-item">${item.name} - Sweetness: ${item.sweetness}, Ice: ${item.ice}</div>`;
+        });
+        document.getElementById("orderList").innerHTML = html;
+
+        function checkout() {
+            alert("Order Placed!");
+            localStorage.removeItem("order");
+            location.href = "index.html";
+        }
+    </script>
+</body>
+
+</html>
