@@ -150,7 +150,7 @@ def build_orders():
     
     return all_orders
 
-def save_to_csv(all_orders, filename="generated_orders.csv"):
+def save_to_csv(all_orders, filename="tables/Orders.csv"):
     cols = ["order_id", "order_date", "order_time", "total_amount", 
             "payment_method", "order_status", "customer_id", "item_link", "custom_id"]
     
