@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boba.shop.OrderSummaryController">
+   <children>
+      <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Order Summary" />
+      
+      <ListView fx:id="orderItemsList" prefHeight="300.0" prefWidth="550.0" />
+      
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Label fx:id="totalPriceLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Total: $0.00" />
+         </children>
+      </HBox>
+      
+      <HBox spacing="10.0" alignment="CENTER_LEFT">
+         <children>
+            <Label text="Payment Method:" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <ChoiceBox fx:id="paymentMethodChoice" prefWidth="100.0" />
+         </children>
+      </HBox>
+      
+      <HBox spacing="10.0" alignment="CENTER">
+         <children>
+            <Button onAction="#onRemoveSelected" style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-size: 14px;" text="Remove Selected" />
+            <Button onAction="#onCheckout" prefWidth="120.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;" text="Checkout" />
+            <Button onAction="#onCancel" prefWidth="120.0" style="-fx-background-color: #666; -fx-text-fill: white; -fx-font-size: 16px;" text="Back" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
