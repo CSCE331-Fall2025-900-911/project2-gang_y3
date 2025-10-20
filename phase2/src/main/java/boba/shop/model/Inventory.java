@@ -1,3 +1,5 @@
+// Joshua
+
 package boba.shop.model;
 
 public class Inventory {
