@@ -6,8 +6,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Shashvat
+ */
 public class EmployeeDAO {
     
+    /**
+     * @return a list of all employees
+     * @throws SQLException if a database access error occurs
+     */
     public static List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT user_id, username, password, role FROM authentication ORDER BY user_id";
@@ -32,6 +39,13 @@ public class EmployeeDAO {
         return employees;
     }
     
+    /**
+     * @param username employee username
+     * @param password employee password
+     * @param role employee role
+     * @return true if the employee was added successfully
+     * @throws SQLException if a database access error occurs
+     */
     public static boolean addEmployee(String username, String password, String role) {
         String getMaxIdSql = "SELECT COALESCE(MAX(user_id), 0) + 1 FROM authentication";
         String sql = "INSERT INTO authentication (user_id, username, password, role) VALUES (?, ?, ?, ?)";
@@ -58,6 +72,14 @@ public class EmployeeDAO {
         }
     }
     
+    /**
+     * @param userId employee ID
+     * @param username updated username
+     * @param password updated password
+     * @param role updated role
+     * @return true if the employee was updated successfully
+     * @throws SQLException if a database access error occurs
+     */
     public static boolean updateEmployee(int userId, String username, String password, String role) {
         String sql = "UPDATE authentication SET username = ?, password = ?, role = ? WHERE user_id = ?";
         
