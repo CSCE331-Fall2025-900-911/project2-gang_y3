@@ -6,8 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@author Sudeep
 public class MenuDAO {
     
+    @param
     public static List<MenuItem> getAllMenuItems() {
         List<MenuItem> menuItems = new ArrayList<>();
         String sql = "SELECT menu_item_id, item_name, category, price, availability, inventory_link " +
@@ -36,6 +38,7 @@ public class MenuDAO {
         return menuItems;
     }
     
+    @return
     public static MenuItem getMenuItemById(int menuItemId) {
         String sql = "SELECT menu_item_id, item_name, category, price, availability, inventory_link " +
                     "FROM menu WHERE menu_item_id = ?";
@@ -64,6 +67,7 @@ public class MenuDAO {
         return null;
     }
     
+    @throws
     public static boolean addMenuItem(String itemName, String category, double price, String inventoryLink) {
         String getMaxIdSql = "SELECT COALESCE(MAX(menu_item_id), 0) + 1 FROM menu";
         String sql = "INSERT INTO menu (menu_item_id, item_name, category, price, availability, inventory_link) VALUES (?, ?, ?, ?, true, ?)";
