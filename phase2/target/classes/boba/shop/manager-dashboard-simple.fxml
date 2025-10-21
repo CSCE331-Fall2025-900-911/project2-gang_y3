@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boba.shop.ManagerDashboardSimpleController">
+   <HBox alignment="CENTER" spacing="20" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-width: 0 0 2 0;">
+      <Label text="Boba Shop - Manager Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+      <Button onAction="#onBackToPOS" text="Back to POS" style="-fx-background-color: #666; -fx-text-fill: white;" />
+      <padding>
+         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+      </padding>
+   </HBox>
+   
+   <TabPane fx:id="managerTabPane" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+         <Tab text="Dashboard">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Today's Overview" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <HBox spacing="30">
+                  <VBox>
+                     <Label text="Today's Orders" style="-fx-font-weight: bold;" />
+                     <Label fx:id="todayOrdersLabel" text="0" style="-fx-font-size: 24px;" />
+                  </VBox>
+                  <VBox>
+                     <Label text="Today's Revenue" style="-fx-font-weight: bold;" />
+                     <Label fx:id="todayRevenueLabel" text="0.00" style="-fx-font-size: 24px;" />
+                  </VBox>
+                  <VBox>
+                     <Label text="Total Employees" style="-fx-font-weight: bold;" />
+                     <Label fx:id="totalEmployeesLabel" text="0" style="-fx-font-size: 24px;" />
+                  </VBox>
+               </HBox>
+               <HBox spacing="30">
+                  <VBox>
+                     <Label text="Most Popular Item" style="-fx-font-weight: bold;" />
+                     <Label fx:id="popularItemsLabel" text="None" />
+                  </VBox>
+                  <VBox>
+                     <Label text="Most Popular Hour" style="-fx-font-weight: bold;" />
+                     <Label fx:id="popularHourLabel" text="None" />
+                  </VBox>
+                  <VBox>
+                     <Label text="Low Inventory Items" style="-fx-font-weight: bold;" />
+                     <Label fx:id="lowInventoryLabel" text="0" />
+                  </VBox>
+               </HBox>
+               <Button onAction="#onRefreshReports" text="Refresh Reports" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+            </VBox>
+         </Tab>
+         <Tab text="Menu Management">
+            <HBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox spacing="10" prefWidth="400">
+                  <Label text="Menu Items" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <ListView fx:id="menuListView" prefHeight="400" />
+               </VBox>
+               <VBox spacing="10" prefWidth="300">
+                  <Label text="Add/Edit Menu Item" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <Label text="Item Name:" />
+                  <TextField fx:id="menuNameField" />
+                  <Label text="Category:" />
+                  <TextField fx:id="menuCategoryField" />
+                  <Label text="Price:" />
+                  <TextField fx:id="menuPriceField" />
+                  <Label text="Inventory Link:" />
+                  <TextField fx:id="menuInventoryLinkField" />
+                  <CheckBox fx:id="menuAvailableCheck" text="Available" selected="true" />
+                  <HBox spacing="10">
+                     <Button onAction="#onAddMenuItem" text="Add Item" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                     <Button onAction="#onUpdateMenuItem" text="Update Selected" style="-fx-background-color: #666; -fx-text-fill: white;" />
+                  </HBox>
+               </VBox>
+            </HBox>
+         </Tab>
+         <Tab text="Inventory Management">
+            <HBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox spacing="10" prefWidth="400">
+                  <Label text="Inventory Items" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <ListView fx:id="inventoryListView" prefHeight="400" />
+               </VBox>
+               <VBox spacing="10" prefWidth="300">
+                  <Label text="Add/Edit Inventory Item" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <Label text="Item Name:" />
+                  <TextField fx:id="invNameField" />
+                  <Label text="Quantity:" />
+                  <TextField fx:id="invQuantityField" />
+                  <Label text="Unit:" />
+                  <TextField fx:id="invUnitField" />
+                  <Label text="Red Threshold:" />
+                  <TextField fx:id="invRedThresholdField" />
+                  <Label text="Yellow Threshold:" />
+                  <TextField fx:id="invYellowThresholdField" />
+                  <HBox spacing="10">
+                     <Button onAction="#onAddInventoryItem" text="Add Item" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                     <Button onAction="#onUpdateInventoryItem" text="Update Selected" style="-fx-background-color: #666; -fx-text-fill: white;" />
+                  </HBox>
+               </VBox>
+            </HBox>
+         </Tab>
+         <Tab text="Employee Management">
+            <HBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox spacing="10" prefWidth="400">
+                  <Label text="Employees" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <ListView fx:id="employeeListView" prefHeight="400" />
+               </VBox>
+               <VBox spacing="10" prefWidth="300">
+                  <Label text="Add/Edit Employee" style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+                  <Label text="Username:" />
+                  <TextField fx:id="empUsernameField" />
+                  <Label text="Password:" />
+                  <TextField fx:id="empPasswordField" />
+                  <Label text="Role:" />
+                  <TextField fx:id="empRoleField" />
+                  <HBox spacing="10">
+                     <Button onAction="#onAddEmployee" text="Add Employee" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                     <Button onAction="#onUpdateEmployee" text="Update Selected" style="-fx-background-color: #666; -fx-text-fill: white;" />
+                  </HBox>
+               </VBox>
+            </HBox>
+         </Tab>
+         <Tab text="X Report">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Daily X Report" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <DatePicker fx:id="xReportDatePicker" visible="false" managed="false" />
+                  <Button fx:id="generateXReportButton" text="Generate Today's X Report" onAction="#onGenerateXReport" 
+                         style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+               </HBox>
+               <TableView fx:id="xReportTable" prefHeight="400">
+                  <columns>
+                     <TableColumn fx:id="hourColumn" text="Hour" prefWidth="80" />
+                     <TableColumn fx:id="salesColumn" text="Sales" prefWidth="80" />
+                     <TableColumn fx:id="returnsColumn" text="Returns" prefWidth="80" />
+                     <TableColumn fx:id="voidsColumn" text="Voids" prefWidth="80" />
+                     <TableColumn fx:id="discardsColumn" text="Discards" prefWidth="80" />
+                     <TableColumn fx:id="cashColumn" text="Cash" prefWidth="80" />
+                     <TableColumn fx:id="cardColumn" text="Card" prefWidth="80" />
+                  </columns>
+               </TableView>
+            </VBox>
+         </Tab>
+         <Tab text="Z Report">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Daily Z Report" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <Button fx:id="generateZReportButton" text="Generate Z Report &amp; Reset" onAction="#onGenerateZReport" 
+                         style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+               </HBox>
+               <TableView fx:id="zReportTable" prefHeight="400">
+                  <columns>
+                     <TableColumn fx:id="zHourColumn" text="Description" prefWidth="120" />
+                     <TableColumn fx:id="zSalesColumn" text="Sales" prefWidth="80" />
+                     <TableColumn fx:id="zVoidsColumn" text="Voids" prefWidth="80" />
+                     <TableColumn fx:id="zDiscardsColumn" text="Discards" prefWidth="80" />
+                     <TableColumn fx:id="zCashColumn" text="Cash" prefWidth="100" />
+                     <TableColumn fx:id="zCardColumn" text="Card" prefWidth="100" />
+                     <TableColumn fx:id="zLowStockColumn" text="Low Stock" prefWidth="90" />
+                     <TableColumn fx:id="zCriticalStockColumn" text="Critical Stock" prefWidth="100" />
+                  </columns>
+               </TableView>
+            </VBox>
+         </Tab>
+         <Tab text="Product Usage">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Product Sales Analysis" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <VBox spacing="10">
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Product:" prefWidth="100" />
+                     <ComboBox fx:id="productComboBox" promptText="Select a product" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Start Date:" prefWidth="100" />
+                     <DatePicker fx:id="startDatePicker" promptText="Start date" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="End Date:" prefWidth="100" />
+                     <DatePicker fx:id="endDatePicker" promptText="End date" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
+                     <Button fx:id="runAnalysisButton" text="Run Analysis" onAction="#onRunProductAnalysis" 
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                  </HBox>
+               </VBox>
+               
+               <VBox spacing="10" style="-fx-padding: 20 0 0 0;">
+                  <Label text="Analysis Results" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Total Units Sold:" prefWidth="150" />
+                     <Label fx:id="totalUnitsSoldLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Total Revenue:" prefWidth="150" />
+                     <Label fx:id="totalRevenueLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Average Daily Sales:" prefWidth="150" />
+                     <Label fx:id="averageDailySalesLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <Label fx:id="analysisStatusLabel" text="" style="-fx-text-fill: #FF5722;" />
+               </VBox>
+            </VBox>
+         </Tab>
+      </tabs>
+   </TabPane>
+   
+   <HBox alignment="CENTER" spacing="20" style="-fx-background-color: white; -fx-border-color: #ccc; -fx-border-width: 2 0 0 0;">
+      <padding>
+         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+      </padding>
+      <Button onAction="#onRefreshAll" text="Refresh All Data" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+   </HBox>
+</VBox>
