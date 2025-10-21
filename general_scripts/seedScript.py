@@ -3,10 +3,10 @@ import random
 import json
 from datetime import datetime, timedelta
 
-start_dt = datetime(2024, 1, 1)
-end_dt = datetime(2024, 9, 30) 
+start_dt = datetime(2025, 4, 1)
+end_dt = datetime(2025, 12, 30) 
 sales_goal = 1000000
-july4th = datetime(2024, 7, 4)
+july4th = datetime(2025, 7, 4)
 open_hour = 8
 close_hour = 20
 
