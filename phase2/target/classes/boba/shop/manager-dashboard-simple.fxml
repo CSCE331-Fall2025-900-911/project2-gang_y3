@@ -131,6 +131,97 @@
                </VBox>
             </HBox>
          </Tab>
+         <Tab text="X Report">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Daily X Report" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <DatePicker fx:id="xReportDatePicker" visible="false" managed="false" />
+                  <Button fx:id="generateXReportButton" text="Generate Today's X Report" onAction="#onGenerateXReport" 
+                         style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+               </HBox>
+               <TableView fx:id="xReportTable" prefHeight="400">
+                  <columns>
+                     <TableColumn fx:id="hourColumn" text="Hour" prefWidth="80" />
+                     <TableColumn fx:id="salesColumn" text="Sales" prefWidth="80" />
+                     <TableColumn fx:id="returnsColumn" text="Returns" prefWidth="80" />
+                     <TableColumn fx:id="voidsColumn" text="Voids" prefWidth="80" />
+                     <TableColumn fx:id="discardsColumn" text="Discards" prefWidth="80" />
+                     <TableColumn fx:id="cashColumn" text="Cash" prefWidth="80" />
+                     <TableColumn fx:id="cardColumn" text="Card" prefWidth="80" />
+                  </columns>
+               </TableView>
+            </VBox>
+         </Tab>
+         <Tab text="Z Report">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Daily Z Report" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <Button fx:id="generateZReportButton" text="Generate Z Report &amp; Reset" onAction="#onGenerateZReport" 
+                         style="-fx-background-color: #f44336; -fx-text-fill: white;" />
+               </HBox>
+               <TableView fx:id="zReportTable" prefHeight="400">
+                  <columns>
+                     <TableColumn fx:id="zHourColumn" text="Description" prefWidth="120" />
+                     <TableColumn fx:id="zSalesColumn" text="Sales" prefWidth="80" />
+                     <TableColumn fx:id="zVoidsColumn" text="Voids" prefWidth="80" />
+                     <TableColumn fx:id="zDiscardsColumn" text="Discards" prefWidth="80" />
+                     <TableColumn fx:id="zCashColumn" text="Cash" prefWidth="100" />
+                     <TableColumn fx:id="zCardColumn" text="Card" prefWidth="100" />
+                     <TableColumn fx:id="zLowStockColumn" text="Low Stock" prefWidth="90" />
+                     <TableColumn fx:id="zCriticalStockColumn" text="Critical Stock" prefWidth="100" />
+                  </columns>
+               </TableView>
+            </VBox>
+         </Tab>
+         <Tab text="Product Usage">
+            <VBox spacing="20">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Product Sales Analysis" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               <VBox spacing="10">
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Product:" prefWidth="100" />
+                     <ComboBox fx:id="productComboBox" promptText="Select a product" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Start Date:" prefWidth="100" />
+                     <DatePicker fx:id="startDatePicker" promptText="Start date" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="End Date:" prefWidth="100" />
+                     <DatePicker fx:id="endDatePicker" promptText="End date" prefWidth="200" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
+                     <Button fx:id="runAnalysisButton" text="Run Analysis" onAction="#onRunProductAnalysis" 
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+                  </HBox>
+               </VBox>
+               
+               <VBox spacing="10" style="-fx-padding: 20 0 0 0;">
+                  <Label text="Analysis Results" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Total Units Sold:" prefWidth="150" />
+                     <Label fx:id="totalUnitsSoldLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Total Revenue:" prefWidth="150" />
+                     <Label fx:id="totalRevenueLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="10" alignment="CENTER_LEFT">
+                     <Label text="Average Daily Sales:" prefWidth="150" />
+                     <Label fx:id="averageDailySalesLabel" text="--" style="-fx-font-weight: bold;" />
+                  </HBox>
+                  <Label fx:id="analysisStatusLabel" text="" style="-fx-text-fill: #FF5722;" />
+               </VBox>
+            </VBox>
+         </Tab>
       </tabs>
    </TabPane>
    
