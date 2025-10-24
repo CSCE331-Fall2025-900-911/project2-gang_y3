@@ -12,8 +12,28 @@ import java.util.List;
 
 import boba.shop.model.ZReportEntry;
 
+/**
+ * Data Access Object (DAO) for generating Z-Reports (end-of-day sales summaries).
+ * This class queries the Orders and Inventory tables to aggregate sales data
+ * and inventory status for the current day.
+ */
 public class ZReportDAO {
 
+    /**
+     * Retrieves and aggregates sales and inventory data for the current day (LocalDate.now()).
+     *
+     * This method queries all orders, filters for those matching the current date,
+     * and aggregates total sales, voids, discards, and payment types (cash/card).
+     * It also queries the inventory table to get counts of items at "low" and
+     * "critical" stock levels.
+     *
+     * Note: This method processes all orders in the database and filters them in Java,
+     * which may be inefficient for large datasets.
+     *
+     * @return A List containing a single ZReportEntry object populated with
+     * the day's total figures.
+     * @throws SQLException if a database access error occurs.
+     */
     public static List<ZReportEntry> getZReportData() throws SQLException {
         LocalDate targetDate = LocalDate.now();
         List<ZReportEntry> result = new ArrayList<>();
@@ -27,6 +47,7 @@ public class ZReportDAO {
         int totalDiscards = 0;
         
         try (Connection conn = DatabaseConnection.getConnection()) {
+            
             String sql = "SELECT order_id, order_date, order_time, total_amount, payment_method, order_status " +
                          "FROM Orders";
             
@@ -44,13 +65,16 @@ public class ZReportDAO {
                     String orderStatus = rs.getString("order_status");
                     double totalAmount = rs.getDouble("total_amount");
                     
+                   
                     LocalDate orderDate = parseDate(dateStr);
                     if (orderDate == null) {
-                        continue;
+                        continue; 
                     }
                     
+                  
                     if (orderDate.equals(targetDate)) {
                         matchCount++;
+                        
                         
                         int salesIncrement = orderStatus.equalsIgnoreCase("fulfilled") ? 1 : 0;
                         totalSales += salesIncrement;
@@ -71,9 +95,11 @@ public class ZReportDAO {
                 
             }
             
+       
             int lowStockCount = 0;
             int criticalStockCount = 0;
             
+           
             String invSql = "SELECT COUNT(*) as low_count FROM inventory WHERE quantity_in_stock <= yellow_threshold AND quantity_in_stock > red_threshold";
             try (PreparedStatement invStmt = conn.prepareStatement(invSql);
                  ResultSet invRs = invStmt.executeQuery()) {
@@ -82,6 +108,7 @@ public class ZReportDAO {
                 }
             }
             
+          
             String criticalSql = "SELECT COUNT(*) as critical_count FROM inventory WHERE quantity_in_stock <= red_threshold";
             try (PreparedStatement critStmt = conn.prepareStatement(criticalSql);
                  ResultSet critRs = critStmt.executeQuery()) {
@@ -90,17 +117,19 @@ public class ZReportDAO {
                 }
             }
             
+           
             dailyTotals = new ZReportEntry(
                 "Daily Totals",
                 totalSales,
-                0,
+                0, 
                 totalVoids,
                 totalDiscards,
                 totalCash,
                 totalCard
             );
             
-            result.add(dailyTotals);            
+            result.add(dailyTotals);
+        
             dailyTotals.setLowStockCount(lowStockCount);
             dailyTotals.setCriticalStockCount(criticalStockCount);
             }
@@ -108,11 +137,22 @@ public class ZReportDAO {
         return result;
     }
     
+    /**
+     * A robust parser for various date formats stored in the database.
+     *
+     * Attempts to parse dates in several common formats (M/d/yy, MM/dd/yy, yyyy-MM-dd)
+     * including a custom parser that correctly handles two-digit years
+     * by assuming the 2000s.
+     *
+     * @param dateStr The date string to parse.
+     * @return A LocalDate object, or null if parsing fails.
+     */
     private static LocalDate parseDate(String dateStr) {
         if (dateStr == null || dateStr.trim().isEmpty()) {
             return null;
         }
         
+ 
         try {
             String[] parts = dateStr.split("/");
             if (parts.length == 3) {
@@ -121,7 +161,7 @@ public class ZReportDAO {
                 int year = Integer.parseInt(parts[2]);
                 
                 if (year < 100) {
-                    year += 2000;
+                    year += 2000; 
                 }
                 
                 return LocalDate.of(year, month, day);
@@ -129,7 +169,7 @@ public class ZReportDAO {
         } catch (Exception e) {
             System.err.println("Custom date parser failed for: " + dateStr);
         }
-        
+   
         String[] formats = {
             "M/d/yy",  
             "MM/dd/yy",
@@ -141,6 +181,7 @@ public class ZReportDAO {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
                 return LocalDate.parse(dateStr, formatter);
             } catch (DateTimeParseException e) {
+          
             }
         }
         
@@ -149,3 +190,4 @@ public class ZReportDAO {
     }
     
 }
+

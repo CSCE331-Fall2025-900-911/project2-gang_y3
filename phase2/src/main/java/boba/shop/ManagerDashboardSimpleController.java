@@ -1,5 +1,4 @@
 // Sudeep
-
 package boba.shop;
 
 import boba.shop.database.*;
@@ -17,12 +16,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Controller for the Manager Dashboard (manager-dashboard-simple.fxml).
+ * This class handles all UI logic for the manager's view, including:
+ * - Managing menu items (Add/Update)
+ * - Managing inventory (Add/Update)
+ * - Managing employees (Add/Update)
+ * - Viewing high-level reports
+ * - Running product sales analysis
+ * - Generating X (hourly) and Z (daily) reports.
+ */
 public class ManagerDashboardSimpleController {
 
+    // FXML UI elements for the main dashboard and tabs
     @FXML private TabPane managerTabPane;
     @FXML private ListView<String> menuListView;
     @FXML private ListView<String> inventoryListView;
     @FXML private ListView<String> employeeListView;
+    
+    // FXML UI elements for the "Dashboard" tab
     @FXML private Label todayOrdersLabel;
     @FXML private Label todayRevenueLabel;
     @FXML private Label popularItemsLabel;
@@ -30,32 +42,37 @@ public class ManagerDashboardSimpleController {
     @FXML private Label lowInventoryLabel;
     @FXML private Label totalEmployeesLabel;
     
+    // FXML UI elements for the "Menu" tab
     @FXML private TextField menuNameField;
     @FXML private TextField menuCategoryField;
     @FXML private TextField menuPriceField;
     @FXML private TextField menuInventoryLinkField;
     @FXML private CheckBox menuAvailableCheck;
     
+    // FXML UI elements for the "Inventory" tab
     @FXML private TextField invNameField;
     @FXML private TextField invQuantityField;
     @FXML private TextField invUnitField;
     @FXML private TextField invRedThresholdField;
     @FXML private TextField invYellowThresholdField;
     
+    // FXML UI elements for the "Employees" tab
     @FXML private TextField empUsernameField;
     @FXML private TextField empPasswordField;
     @FXML private TextField empRoleField;
     
+    // FXML UI elements for the "Product Analysis" tab
     @FXML private ComboBox<boba.shop.model.MenuItem> productComboBox;
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker endDatePicker;
     @FXML private Button runAnalysisButton;
     @FXML private Label totalUnitsSoldLabel;
-    @FXML private Label totalRevenueLabel;
+    @FXML private Label totalRevenueLabel; // Note: This ID is reused, FXML might bind to the first one
     @FXML private Label averageDailySalesLabel;
     @FXML private Label analysisStatusLabel;
     
-    @FXML private DatePicker xReportDatePicker;
+    // FXML UI elements for the "X Report" tab
+    @FXML private DatePicker xReportDatePicker; // This is hidden in initialize()
     @FXML private Button generateXReportButton;
     @FXML private TableView<boba.shop.model.XReportEntry> xReportTable;
     @FXML private TableColumn<boba.shop.model.XReportEntry, String> hourColumn;
@@ -66,6 +83,7 @@ public class ManagerDashboardSimpleController {
     @FXML private TableColumn<boba.shop.model.XReportEntry, Double> cashColumn;
     @FXML private TableColumn<boba.shop.model.XReportEntry, Double> cardColumn;
     
+    // FXML UI elements for the "Z Report" tab
     @FXML private Button generateZReportButton;
     @FXML private TableView<boba.shop.model.ZReportEntry> zReportTable;
     @FXML private TableColumn<boba.shop.model.ZReportEntry, String> zHourColumn;
@@ -77,15 +95,23 @@ public class ManagerDashboardSimpleController {
     @FXML private TableColumn<boba.shop.model.ZReportEntry, Integer> zLowStockColumn;
     @FXML private TableColumn<boba.shop.model.ZReportEntry, Integer> zCriticalStockColumn;
 
+    // ObservableLists for JavaFX UI elements
     private ObservableList<String> menuDisplayList;
     private ObservableList<String> inventoryDisplayList;
     private ObservableList<String> employeeDisplayList;
     private ObservableList<boba.shop.model.XReportEntry> xReportEntries;
     private ObservableList<boba.shop.model.ZReportEntry> zReportEntries;
+    
+    // Lists to hold the full data models, mirroring the display lists
     private List<boba.shop.model.MenuItem> menuItems;
     private List<Inventory> inventoryItems;
     private List<Employee> employees;
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the FXML file has been loaded. It sets up ListView/TableView items,
+     * cell factories for custom display, and loads all initial data.
+     */
     public void initialize() {
         menuDisplayList = FXCollections.observableArrayList();
         inventoryDisplayList = FXCollections.observableArrayList();
@@ -273,12 +299,19 @@ public class ManagerDashboardSimpleController {
         loadReports();
     }
 
+    /**
+     * Helper method to load data for Menu, Inventory, and Employees.
+     */
     private void loadAllData() {
         loadMenuData();
         loadInventoryData();
         loadEmployeeData();
     }
 
+    /**
+     * Fetches menu items from MenuDAO and populates the menu ListView
+     * and the product analysis ComboBox.
+     */
     private void loadMenuData() {
         try {
             menuItems = MenuDAO.getAllMenuItems();
@@ -302,6 +335,9 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * Fetches inventory items from InventoryDAO and populates the inventory ListView.
+     */
     private void loadInventoryData() {
         try {
             inventoryItems = InventoryDAO.getAllInventoryItems();
@@ -314,6 +350,9 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * Fetches employees from EmployeeDAO and populates the employee ListView.
+     */
     private void loadEmployeeData() {
         try {
             employees = EmployeeDAO.getAllEmployees();
@@ -326,6 +365,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * Fetches daily report summaries from ReportsDAO and populates the
+     * labels on the main dashboard tab.
+     */
     private void loadReports() {
         try {
             Map<String, Object> reports = ReportsDAO.getDailyReports();
@@ -351,6 +394,12 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * Calculates the number of inventory items that are at or below their
+     * red (critical) threshold.
+     *
+     * @return The count of items at or below the red threshold.
+     */
     private int getUnderThresholdCount() {
         int count = 0;
         for (Inventory item : inventoryItems) {
@@ -360,6 +409,11 @@ public class ManagerDashboardSimpleController {
         }
         return count;
     }
+    
+    /**
+     * FXML Action: Handles adding a new menu item.
+     * Reads data from the menu text fields and calls MenuDAO.addMenuItem.
+     */
     @FXML
     private void onAddMenuItem() {
         try {
@@ -387,6 +441,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Handles updating an existing menu item.
+     * Reads data from fields and updates the item selected in the menu ListView.
+     */
     @FXML
     private void onUpdateMenuItem() {
         int selectedIndex = menuListView.getSelectionModel().getSelectedIndex();
@@ -417,6 +475,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Handles adding a new inventory item.
+     * Reads data from inventory text fields and calls InventoryDAO.addInventoryItem.
+     */
     @FXML
     private void onAddInventoryItem() {
         try {
@@ -445,6 +507,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Handles updating an existing inventory item.
+     * Reads data from fields and updates the item selected in the inventory ListView.
+     */
     @FXML
     private void onUpdateInventoryItem() {
         int selectedIndex = inventoryListView.getSelectionModel().getSelectedIndex();
@@ -475,6 +541,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Handles adding a new employee.
+     * Reads data from employee text fields and calls EmployeeDAO.addEmployee.
+     */
     @FXML
     private void onAddEmployee() {
         try {
@@ -499,6 +569,10 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Handles updating an existing employee.
+     * Reads data from fields and updates the employee selected in the employee ListView.
+     */
     @FXML
     private void onUpdateEmployee() {
         int selectedIndex = employeeListView.getSelectionModel().getSelectedIndex();
@@ -525,17 +599,26 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * FXML Action: Refreshes the data on the "Dashboard" tab.
+     */
     @FXML
     private void onRefreshReports() {
         loadReports();
     }
 
+    /**
+     * FXML Action: Refreshes all data across all tabs.
+     */
     @FXML
     private void onRefreshAll() {
         loadAllData();
         loadReports();
     }
 
+    /**
+     * FXML Action: Navigates back to the main Point-of-Sale (POS) screen.
+     */
     @FXML
     private void onBackToPOS() {
         try {
@@ -545,6 +628,9 @@ public class ManagerDashboardSimpleController {
         }
     }
 
+    /**
+     * Clears all text fields in the "Menu" management tab.
+     */
     private void clearMenuFields() {
         menuNameField.clear();
         menuCategoryField.clear();
@@ -553,6 +639,9 @@ public class ManagerDashboardSimpleController {
         menuAvailableCheck.setSelected(true);
     }
 
+    /**
+     * Clears all text fields in the "Inventory" management tab.
+     */
     private void clearInventoryFields() {
         invNameField.clear();
         invQuantityField.clear();
@@ -561,12 +650,21 @@ public class ManagerDashboardSimpleController {
         invYellowThresholdField.clear();
     }
 
+    /**
+     * Clears all text fields in the "Employees" management tab.
+     */
     private void clearEmployeeFields() {
         empUsernameField.clear();
         empPasswordField.clear();
         empRoleField.clear();
     }
 
+    /**
+     * Utility method to show a simple information alert dialog.
+     *
+     * @param title The title for the alert window.
+     * @param message The content message for the alert.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -575,6 +673,10 @@ public class ManagerDashboardSimpleController {
         alert.showAndWait();
     }
     
+    /**
+     * FXML Action: Runs the product sales analysis based on selected
+     * product and date range.
+     */
     @FXML
     private void onRunProductAnalysis() {
         try {
@@ -638,12 +740,18 @@ public class ManagerDashboardSimpleController {
         }
     }
     
+    /**
+     * Resets the product analysis result labels to their default state.
+     */
     private void resetAnalysisResults() {
         totalUnitsSoldLabel.setText("--");
         totalRevenueLabel.setText("--");
         averageDailySalesLabel.setText("--");
     }
     
+    /**
+     * FXML Action: Generates the X-Report (hourly summary) for the current day.
+     */
     @FXML
     private void onGenerateXReport() {
         LocalDate currentDate = LocalDate.now();
@@ -691,11 +799,18 @@ public class ManagerDashboardSimpleController {
         }
     }
     
+    /**
+     * FXML Action: Generates the Z-Report (end-of-day summary).
+     */
     @FXML
     private void onGenerateZReport() {
         generateZReport();
     }
     
+    /**
+     * Core logic for generating the Z-Report. Fetches data from ZReportDAO,
+     * populates the Z-Report TableView, and displays a summary alert.
+     */
     private void generateZReport() {
         try {
             
@@ -754,4 +869,119 @@ public class ManagerDashboardSimpleController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Creates a TableCell for formatting Double values as currency ($0.00).
+     * For XReportEntry.
+     * @return A new TableCell for currency formatting.
+     */
+    private TableCell<boba.shop.model.XReportEntry, Double> createCurrencyCell() {
+        return new TableCell<boba.shop.model.XReportEntry, Double>() {
+            @Override
+            protected void updateItem(Double amount, boolean empty) {
+                super.updateItem(amount, empty);
+                if (empty || amount == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", amount));
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a TableCell for formatting Double values as currency ($0.00).
+     * For ZReportEntry.
+     * @return A new TableCell for currency formatting.
+     */
+    private TableCell<boba.shop.model.ZReportEntry, Double> createCurrencyCellZ() {
+        return new TableCell<boba.shop.model.ZReportEntry, Double>() {
+            @Override
+            protected void updateItem(Double amount, boolean empty) {
+                super.updateItem(amount, empty);
+                if (empty || amount == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("$%.2f", amount));
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a TableCell that formats an Integer and styles the text red
+     * if the value is greater than zero. For XReportEntry.
+     * @return A new TableCell with conditional red styling.
+     */
+    private TableCell<boba.shop.model.XReportEntry, Integer> createRedOnPositiveCell() {
+        return new TableCell<boba.shop.model.XReportEntry, Integer>() {
+            @Override
+            protected void updateItem(Integer count, boolean empty) {
+                super.updateItem(count, empty);
+                if (empty || count == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(count.toString());
+                    if (count > 0) {
+                        setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a TableCell that formats an Integer and styles the text red
+     * if the value is greater than zero. For ZReportEntry.
+     * @return A new TableCell with conditional red styling.
+     */
+    private TableCell<boba.shop.model.ZReportEntry, Integer> createRedOnPositiveCellZ() {
+        return new TableCell<boba.shop.model.ZReportEntry, Integer>() {
+            @Override
+            protected void updateItem(Integer count, boolean empty) {
+                super.updateItem(count, empty);
+                if (empty || count == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(count.toString());
+                    if (count > 0) {
+                        setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        };
+    }
+
+    /**
+     * Creates a TableCell that formats an Integer and styles the text with
+     * a specific color if the value is greater than zero.
+     * @param color The CSS color string (e.g., "red" or "#FF8C00").
+     * @return A new TableCell with conditional styling.
+     */
+    private TableCell<boba.shop.model.ZReportEntry, Integer> createColoredStockCell(String color) {
+        return new TableCell<boba.shop.model.ZReportEntry, Integer>() {
+            @Override
+            protected void updateItem(Integer count, boolean empty) {
+                super.updateItem(count, empty);
+                if (empty || count == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(count.toString());
+                    if (count > 0) {
+                        setStyle(String.format("-fx-text-fill: %s; -fx-font-weight: bold;", color));
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        };
+    }
 }
+
