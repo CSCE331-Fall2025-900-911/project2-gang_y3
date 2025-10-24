@@ -15,7 +15,8 @@ import boba.shop.model.Employee;
 /**
  * Handles employee database operations such as retrieving, adding, and updating records.
  * Uses the DatabaseConnection class for connecting to PostgreSQL.
- * @author Shashvat
+ * 
+ * @author Shashvat Chathapuram and Sonith Guduru
  */
 public class EmployeeDAO {
 

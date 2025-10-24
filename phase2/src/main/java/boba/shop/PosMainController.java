@@ -1,4 +1,4 @@
-// Shashvat
+
 
 
 package boba.shop;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 /**
  * Controller for the main POS interface. Handles menu loading, order updates, and navigation.
- * @author Shashvat
+ * @author Joshua Samuel and Shashvat Chathapuram
  */
 public class PosMainController {
 

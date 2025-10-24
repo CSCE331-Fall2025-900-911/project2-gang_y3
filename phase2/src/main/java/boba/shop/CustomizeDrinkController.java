@@ -1,4 +1,4 @@
-// Shashvat
+
 
 
 package boba.shop;
@@ -17,7 +17,8 @@ import javafx.stage.Stage;
 /**
  * Controller for customizing drink options such as sweetness and ice levels.
  * Handles user selections and adds customized drinks to the order.
- * @author Shashvat
+ * 
+ * @author Joshua Samuel and Sudeep Sirivella
  */
 public class CustomizeDrinkController {
 

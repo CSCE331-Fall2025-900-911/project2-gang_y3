@@ -13,22 +13,20 @@ import java.util.List;
 import boba.shop.model.ZReportEntry;
 
 /**
- * Data Access Object (DAO) for generating Z-Reports (end-of-day sales summaries).
- * This class queries the Orders and Inventory tables to aggregate sales data
- * and inventory status for the current day.
+ * Data Access Object for generating Z-Reports (end-of-day sales summaries).
+ * This class queries the Orders and Inventory tables to aggregate sales data and inventory status for the current day.
+ * 
+ * @author Joshua Samuel and Sonith Guduru
  */
 public class ZReportDAO {
 
     /**
      * Retrieves and aggregates sales and inventory data for the current day (LocalDate.now()).
      *
-     * This method queries all orders, filters for those matching the current date,
-     * and aggregates total sales, voids, discards, and payment types (cash/card).
-     * It also queries the inventory table to get counts of items at "low" and
-     * "critical" stock levels.
+     * This method queries all orders, filters for those matching the current date, and aggregates total sales, voids, discards, and payment types (cash/card).
+     * It also queries the inventory table to get counts of items at "low" and "critical" stock levels.
      *
-     * Note: This method processes all orders in the database and filters them in Java,
-     * which may be inefficient for large datasets.
+     * 
      *
      * @return A List containing a single ZReportEntry object populated with
      * the day's total figures.
@@ -140,9 +138,7 @@ public class ZReportDAO {
     /**
      * A robust parser for various date formats stored in the database.
      *
-     * Attempts to parse dates in several common formats (M/d/yy, MM/dd/yy, yyyy-MM-dd)
-     * including a custom parser that correctly handles two-digit years
-     * by assuming the 2000s.
+     * Attempts to parse dates in several common formats (M/d/yy, MM/dd/yy, yyyy-MM-dd) including a custom parser that correctly handles two-digit years by assuming the 2000s.
      *
      * @param dateStr The date string to parse.
      * @return A LocalDate object, or null if parsing fails.

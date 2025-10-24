@@ -4,9 +4,9 @@ import javafx.beans.property.*;
 
 /**
  * Represents a single row of data for a Z-Report (end-of-day summary).
- * This class is a JavaFX data model (POJO) that uses JavaFX Properties
- * to allow easy binding with TableView columns. It also includes
- * fields for inventory status.
+ * This class is a JavaFX data model (POJO) that uses JavaFX Properties to allow easy binding with TableView columns. It also includes fields for inventory status.
+ * 
+ * @author Joshua Samuel and Shashvat Chathapuram
  */
 public class ZReportEntry {
     private final StringProperty hour; 

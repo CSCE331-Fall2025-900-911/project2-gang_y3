@@ -1,4 +1,4 @@
-// Sudeep
+
 
 package boba.shop.model;
 
@@ -12,8 +12,8 @@ import java.util.Map;
 
 /**
  * Manages the state of the current customer order using the Singleton pattern.
- * This class holds the list of items being ordered, calculates the total price,
- * and handles the submission of the order to the database.
+ * This class holds the list of items being ordered, calculates the total price, and handles the submission of the order to the database.
+ * @author Joshua Samuel and Sonith Guduru
  */
 public class OrderManager {
     private static OrderManager instance;
@@ -52,8 +52,7 @@ public class OrderManager {
     }
 
     /**
-     * Removes a DrinkItem from the current order by its index
-     * and recalculates the total price.
+     * Removes a DrinkItem from the current order by its index and recalculates the total price.
      *
      * @param index The index of the item to remove.
      */
@@ -70,7 +69,7 @@ public class OrderManager {
      * @return A new ArrayList containing all DrinkItems in the current order.
      */
     public List<DrinkItem> getCurrentOrder() {
-        return new ArrayList<>(currentOrder); // Return a copy
+        return new ArrayList<>(currentOrder);
     }
 
     /**
@@ -100,8 +99,7 @@ public class OrderManager {
     }
 
     /**
-     * Private helper method to recalculate the total price of the order
-     * by summing the prices of all DrinkItems.
+     * Private helper method to recalculate the total price of the order by summing the prices of all DrinkItems.
      */
     private void recalculateTotal() {
         totalPrice = currentOrder.stream()
@@ -111,8 +109,7 @@ public class OrderManager {
 
     /**
      * Submits the current order to the database.
-     * This method aggregates item counts and customizations into JSON strings,
-     * creates an Order object, and inserts it using OrderDAO.
+     * This method aggregates item counts and customizations into JSON strings, creates an Order object, and inserts it using OrderDAO.
      *
      * @param paymentMethod The payment method used (e.g., "cash", "card").
      * @return true if the order was successfully inserted, false otherwise.
@@ -161,7 +158,7 @@ public class OrderManager {
 
     /**
      * Creates a simple JSON string from a map of item IDs to their quantities.
-     * Example: {"1":2, "3":1}
+     * 
      *
      * @param itemCounts A map where the key is menu_item_id and value is quantity.
      * @return A JSON-formatted string.
@@ -180,10 +177,9 @@ public class OrderManager {
 
     /**
      * Creates a simple JSON string from a map of item customizations.
-     * Example: {"1":{"ice":"50%","sugar":"25%"}}
+     * 
      *
-     * @param customizations A map where the key is menu_item_id and value is another
-     * map of customization types (e.g., "ice") to values (e.g., "50%").
+     * @param customizations A map where the key is menu_item_id and value is another map of customization types (e.g., "ice") to values (e.g., "50%").
      * @return A JSON-formatted string.
      */
     private String createCustomJsonString(Map<Integer, Map<String, String>> customizations) {

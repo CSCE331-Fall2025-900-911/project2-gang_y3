@@ -12,14 +12,14 @@ import java.util.Map;
 /**
  * Handles generating daily reports from the database, including orders, revenue, and inventory data.
  * Uses DatabaseConnection for PostgreSQL access.
- * @author Shashvat
+ * 
+ * @author Sudeep Sirivella and Sonith Guduru
  */
 public class ReportsDAO {
 
 
     /**
-     * Retrieves daily report data, including order count, revenue, popular items, peak hour,
-     * low inventory, and total employees.
+     * Retrieves daily report data, including order count, revenue, popular items, peak hour, low inventory, and total employees.
      *
      * @return a map of report data
      * @throws SQLException if a database access error occurs

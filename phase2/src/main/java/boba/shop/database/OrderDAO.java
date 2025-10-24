@@ -1,4 +1,4 @@
-// Joshua
+
 
 package boba.shop.database;
 
@@ -7,8 +7,21 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Data Access Object for handling database operations related to Orders.
+ * This class provides static methods for inserting new orders into the 'orders' table.
+ * 
+ * @author Joshua Samuel and Shashvat Chathapuram
+ */
 public class OrderDAO {
     
+    /**
+     * Inserts a new order into the database.
+     * This method first retrieves the next available order ID and then inserts the new order record.
+     *
+     * @param order The Order object containing all data for the new order.
+     * @return The new order_id if the insertion was successful, or -1 if it failed.
+     */
     public static int insertOrder(Order order) {
         int nextOrderId = getNextOrderId();
         if (nextOrderId == -1) return -1;
@@ -37,6 +50,11 @@ public class OrderDAO {
         }
     }
     
+    /**
+     * Retrieves the next available order_id by finding the current maximum order_id and adding 1.
+     *
+     * @return The next integer ID to be used, or -1 if a database error occurs.
+     */
     private static int getNextOrderId() {
         String sql = "SELECT COALESCE(MAX(order_id), 0) + 1 FROM orders";
         

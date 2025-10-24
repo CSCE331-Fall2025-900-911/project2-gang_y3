@@ -11,20 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Data Access Object (DAO) for performing sales analysis.
+ * Data Access Object for performing sales analysis.
  * This class provides methods to query and aggregate sales data from the Orders table.
+ * 
+ * @author Joshua Samuel and Sudeep Sirivella
  */
 public class SalesAnalysisDAO {
 
     /**
      * Analyzes sales for a specific product (MenuItem) within a given date range.
      *
-     * This method searches the 'item_link' JSON string in the Orders table for a specific
-     * menu item ID. It only includes orders marked as 'fulfilled' and within the
-     * specified start and end dates.
+     * This method searches the 'item_link' JSON string in the Orders table for a specific menu item ID. It only includes orders marked as 'fulfilled' and within the specified start and end dates.
      *
-     * Note: This method filters dates in Java, which can be inefficient.
-     * It also relies on a LIKE query for a JSON string, which is not optimal.
+     * 
      *
      * @param menuItemId The ID of the menu item to analyze.
      * @param startDate The start date of the analysis period (inclusive).
@@ -100,9 +99,7 @@ public class SalesAnalysisDAO {
     /**
      * A robust parser for various date formats stored in the database.
      *
-     * Attempts to parse dates in several common formats (M/d/yy, M/d/yyyy, yyyy-MM-dd)
-     * including a custom parser that correctly handles two-digit years
-     * by assuming the 2000s.
+     * Attempts to parse dates in several common formats (M/d/yy, M/d/yyyy, yyyy-MM-dd) including a custom parser that correctly handles two-digit years by assuming the 2000s.
      *
      * @param dateStr The date string to parse.
      * @return A LocalDate object.

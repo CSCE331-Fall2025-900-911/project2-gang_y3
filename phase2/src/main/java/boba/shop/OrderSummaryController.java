@@ -1,4 +1,4 @@
-// Joshua
+
 
 package boba.shop;
 
@@ -15,6 +15,12 @@ import javafx.scene.control.Alert;
 
 import java.util.List;
 
+/**
+ * Controller for the Order Summary modal dialog (order-summary.fxml).
+ * This class handles displaying the current order, total price, removing items, and submitting the order.
+ * 
+ * @author Sudeep Sirivella and Shashvat Chathapuram
+ */
 public class OrderSummaryController {
 
     @FXML
@@ -29,12 +35,16 @@ public class OrderSummaryController {
     private OrderManager orderManager;
     private ObservableList<String> orderDisplayList;
 
+    /**
+     * Initializes the controller class. This method is automatically called after the FXML file has been loaded.
+     * It gets the OrderManager instance, sets up the ListView, and populates the payment method ChoiceBox.
+     */
     public void initialize() {
         orderManager = OrderManager.getInstance();
         orderDisplayList = FXCollections.observableArrayList();
         orderItemsList.setItems(orderDisplayList);
         
-        // Setup payment method choice box
+        
         if (paymentMethodChoice != null) {
             paymentMethodChoice.setItems(FXCollections.observableArrayList("cash", "card"));
             paymentMethodChoice.setValue("card");
@@ -43,6 +53,9 @@ public class OrderSummaryController {
         updateOrderDisplay();
     }
 
+    /**
+     * Updates the ListView and total price label to reflect the current state of the order in OrderManager.
+     */
     private void updateOrderDisplay() {
         orderDisplayList.clear();
         List<DrinkItem> order = orderManager.getCurrentOrder();
@@ -54,18 +67,22 @@ public class OrderSummaryController {
         totalPriceLabel.setText(String.format("Total: $%.2f", orderManager.getTotalPrice()));
     }
 
+    /**
+     * FXML Action: Handles the checkout process.
+     * Validates that the order is not empty, gets the selected payment method, and submits the order via OrderManager.
+     * Shows a confirmation or error alert and closes the dialog on success.
+     */
     @FXML
     private void onCheckout() {
         if (orderManager.getOrderSize() == 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Empty");
+            alert.setTitle("Empty Order");
             alert.setHeaderText(null);
-            alert.setContentText("Make sure to add items to your order before checking out.");
+            alert.setContentText("Please add items to your order before checking out.");
             alert.showAndWait();
             return;
         }
 
-        // Get selected payment method
         String paymentMethod = (paymentMethodChoice != null) ? paymentMethodChoice.getValue() : "card";
         if (paymentMethod == null) {
             paymentMethod = "card";
@@ -90,12 +107,20 @@ public class OrderSummaryController {
         }
     }
 
+    /**
+     * FXML Action: Cancels the order summary and closes the dialog window.
+     */
     @FXML
     private void onCancel() {
         Stage stage = (Stage) orderItemsList.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * FXML Action: Removes the selected item from the order.
+     * Gets the selected index from the ListView and calls
+     * OrderManager.removeItem(), then updates the display.
+     */
     @FXML
     private void onRemoveSelected() {
         int selectedIndex = orderItemsList.getSelectionModel().getSelectedIndex();

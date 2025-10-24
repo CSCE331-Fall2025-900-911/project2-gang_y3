@@ -1,10 +1,11 @@
-// Sudeep
+
 package boba.shop.model;
 
 /**
  * Represents an Employee entity.
- * This class is a simple data model (POJO) to hold employee information
- * such as their ID, username, password, and role.
+ * This class is a simple data model (POJO) to hold employee information such as their ID, username, password, and role.
+ * 
+ * @author Joshua Samuel and Shashvat Chathapuram
  */
 public class Employee {
     private int userId;
@@ -77,8 +78,8 @@ public class Employee {
     
     /**
      * Generates a formatted string for display in UI lists.
-     * Example: "sudeep (manager) - ID: 1"
      *
+     * 
      * @return A formatted display string.
      */
     public String getDisplayString() {

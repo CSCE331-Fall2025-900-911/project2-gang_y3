@@ -11,11 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 /**
- * Controller class for managing and displaying inventory items in the Boba Shop
- * application. It organizes inventory data into categories (milk, boba,
- * utensils) and provides methods to refresh, sort, and navigate between views.
+ * Controller class for managing and displaying inventory items in the Boba Shop application. It organizes inventory data into categories (milk, boba, utensils) and provides methods to refresh, sort, and navigate between views.
  *
- * @author Sonith
+ * @author Sonith Guduru and Shashvat Chathapuram
  */
 public class InventoryManagerController {
 
@@ -40,8 +38,7 @@ public class InventoryManagerController {
     }
 
     /**
-     * Loads all inventory items from the database and categorizes them into
-     * milk, boba, and utensil lists for display in the UI.
+     * Loads all inventory items from the database and categorizes them into milk, boba, and utensil lists for display in the UI.
      */
     private void loadInventoryData() {
         try {

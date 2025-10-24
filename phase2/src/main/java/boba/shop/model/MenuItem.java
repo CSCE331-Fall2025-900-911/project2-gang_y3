@@ -1,4 +1,4 @@
-// Shashvat
+
 
 
 package boba.shop.model;
@@ -6,7 +6,7 @@ package boba.shop.model;
 
 /**
  * Represents an item on the menu with its details and availability.
- * @author Shashvat
+ * @author Joshua Samuel and Sudeep Sirivella
  */
 public class MenuItem {
     private int menuItemId;

@@ -1,13 +1,11 @@
 /**
  * Module definition for the boba.shop application.
  *
- * This module sets up the Boba Shop project, including its JavaFX
- * user interface and its database access.
+ * This module sets up the Boba Shop project, including its JavaFX user interface and its database access.
  *
- * It declares which libraries are required and which packages are
- * available to other parts of the program.
+ * It declares which libraries are required and which packages are available to other parts of the program.
  *
- * @author Sonith
+ * @author Sudeep Sirivella and Sonith Guduru
  */
 module boba.shop {
     requires javafx.controls;

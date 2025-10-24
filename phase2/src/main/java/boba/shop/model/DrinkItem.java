@@ -1,12 +1,9 @@
 package boba.shop.model;
 
 /**
- * Represents a customized drink item in the Boba Shop system. Each drink
- * includes details such as the base menu item, ice level, sugar level, and
- * quantity. It also provides methods to calculate the total price and return a
- * readable string representation.
+ * Represents a customized drink item in the Boba Shop system. Each drink includes details such as the base menu item, ice level, sugar level, and quantity. It also provides methods to calculate the total price and return a readable string representation.
  *
- * @author Sonith
+ * @author Sudeep Sirivella and Shashvat Chathapuram
  */
 public class DrinkItem {
 
@@ -16,8 +13,7 @@ public class DrinkItem {
     private int quantity;
 
     /**
-     * Constructs a new DrinkItem with the given menu item, ice level, sugar
-     * level, and quantity.
+     * Constructs a new DrinkItem with the given menu item, ice level, sugar level, and quantity.
      *
      * @param menuItem the base menu item selected
      * @param iceLevel the chosen ice level (e.g., "No Ice", "Less Ice")
@@ -86,8 +82,7 @@ public class DrinkItem {
     }
 
     /**
-     * Returns a string representation of the drink item, including quantity,
-     * name, ice level, sugar level, and total price.
+     * Returns a string representation of the drink item, including quantity, name, ice level, sugar level, and total price.
      *
      * @return a formatted string describing the drink order
      */

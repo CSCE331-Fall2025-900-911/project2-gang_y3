@@ -15,26 +15,22 @@ import java.util.Map;
 import boba.shop.model.XReportEntry;
 
 /**
- * Data Access Object (DAO) for generating X-Reports (hourly sales summaries).
- * This class queries the Orders table to aggregate sales data for a specific day,
- * broken down by the hour.
+ * Data Access Object for generating X-Reports (hourly sales summaries).
+ * This class queries the Orders table to aggregate sales data for a specific day, broken down by the hour.
+ * 
+ * @author Sonith Guduru and Shashvat Chathapuram
  */
 public class XReportDAO {
     
     /**
      * Retrieves and aggregates sales data for a specified date, broken down by hour.
      *
-     * This method initializes a list of XReportEntry objects for each hour from
-     * 8:00 AM to 7:00 PM (19:00). It then queries the Orders table, filters for
-     * orders matching the targetDate, and aggregates sales, voids, discards, and
-     * payment types (cash/card) into the corresponding hour.
+     * This method initializes a list of XReportEntry objects for each hour from 8:00 AM to 7:00 PM (19:00). It then queries the Orders table, filters for orders matching the targetDate, and aggregates sales, voids, discards, and payment types (cash/card) into the corresponding hour.
      *
-     * Note: This method processes all orders in the database and filters them in Java,
-     * which may be inefficient for large datasets.
+     * 
      *
      * @param targetDate The specific date for which to generate the report.
-     * @return A List of XReportEntry objects, one for each hour, populated with
-     * that hour's sales data.
+     * @return A List of XReportEntry objects, one for each hour, populated with that hour's sales data.
      * @throws SQLException if a database access error occurs.
      */
     public static List<XReportEntry> getXReportData(LocalDate targetDate) throws SQLException {
@@ -142,9 +138,7 @@ public class XReportDAO {
     /**
      * A robust parser for various date formats stored in the database.
      *
-     * Attempts to parse dates in several common formats (M/d/yy, MM/dd/yy, yyyy-MM-dd)
-     * including a custom parser that correctly handles two-digit years
-     * by assuming the 2000s.
+     * Attempts to parse dates in several common formats (M/d/yy, MM/dd/yy, yyyy-MM-dd) including a custom parser that correctly handles two-digit years by assuming the 2000s.
      *
      * @param dateStr The date string to parse.
      * @return A LocalDate object, or null if parsing fails.

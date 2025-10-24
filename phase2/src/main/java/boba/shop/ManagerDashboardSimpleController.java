@@ -1,4 +1,4 @@
-// Sudeep
+
 package boba.shop;
 
 import boba.shop.database.*;
@@ -25,16 +25,18 @@ import java.time.temporal.ChronoUnit;
  * - Viewing high-level reports
  * - Running product sales analysis
  * - Generating X (hourly) and Z (daily) reports.
+ * 
+ * @author Joshua Samuel and Sonith Guduru
  */
 public class ManagerDashboardSimpleController {
 
-    // FXML UI elements for the main dashboard and tabs
+
     @FXML private TabPane managerTabPane;
     @FXML private ListView<String> menuListView;
     @FXML private ListView<String> inventoryListView;
     @FXML private ListView<String> employeeListView;
     
-    // FXML UI elements for the "Dashboard" tab
+    
     @FXML private Label todayOrdersLabel;
     @FXML private Label todayRevenueLabel;
     @FXML private Label popularItemsLabel;
@@ -42,37 +44,37 @@ public class ManagerDashboardSimpleController {
     @FXML private Label lowInventoryLabel;
     @FXML private Label totalEmployeesLabel;
     
-    // FXML UI elements for the "Menu" tab
+    
     @FXML private TextField menuNameField;
     @FXML private TextField menuCategoryField;
     @FXML private TextField menuPriceField;
     @FXML private TextField menuInventoryLinkField;
     @FXML private CheckBox menuAvailableCheck;
     
-    // FXML UI elements for the "Inventory" tab
+    
     @FXML private TextField invNameField;
     @FXML private TextField invQuantityField;
     @FXML private TextField invUnitField;
     @FXML private TextField invRedThresholdField;
     @FXML private TextField invYellowThresholdField;
     
-    // FXML UI elements for the "Employees" tab
+    
     @FXML private TextField empUsernameField;
     @FXML private TextField empPasswordField;
     @FXML private TextField empRoleField;
     
-    // FXML UI elements for the "Product Analysis" tab
+    
     @FXML private ComboBox<boba.shop.model.MenuItem> productComboBox;
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker endDatePicker;
     @FXML private Button runAnalysisButton;
     @FXML private Label totalUnitsSoldLabel;
-    @FXML private Label totalRevenueLabel; // Note: This ID is reused, FXML might bind to the first one
+    @FXML private Label totalRevenueLabel;
     @FXML private Label averageDailySalesLabel;
     @FXML private Label analysisStatusLabel;
     
-    // FXML UI elements for the "X Report" tab
-    @FXML private DatePicker xReportDatePicker; // This is hidden in initialize()
+    
+    @FXML private DatePicker xReportDatePicker;
     @FXML private Button generateXReportButton;
     @FXML private TableView<boba.shop.model.XReportEntry> xReportTable;
     @FXML private TableColumn<boba.shop.model.XReportEntry, String> hourColumn;
@@ -83,7 +85,7 @@ public class ManagerDashboardSimpleController {
     @FXML private TableColumn<boba.shop.model.XReportEntry, Double> cashColumn;
     @FXML private TableColumn<boba.shop.model.XReportEntry, Double> cardColumn;
     
-    // FXML UI elements for the "Z Report" tab
+    
     @FXML private Button generateZReportButton;
     @FXML private TableView<boba.shop.model.ZReportEntry> zReportTable;
     @FXML private TableColumn<boba.shop.model.ZReportEntry, String> zHourColumn;
@@ -95,22 +97,20 @@ public class ManagerDashboardSimpleController {
     @FXML private TableColumn<boba.shop.model.ZReportEntry, Integer> zLowStockColumn;
     @FXML private TableColumn<boba.shop.model.ZReportEntry, Integer> zCriticalStockColumn;
 
-    // ObservableLists for JavaFX UI elements
+    
     private ObservableList<String> menuDisplayList;
     private ObservableList<String> inventoryDisplayList;
     private ObservableList<String> employeeDisplayList;
     private ObservableList<boba.shop.model.XReportEntry> xReportEntries;
     private ObservableList<boba.shop.model.ZReportEntry> zReportEntries;
     
-    // Lists to hold the full data models, mirroring the display lists
+    
     private List<boba.shop.model.MenuItem> menuItems;
     private List<Inventory> inventoryItems;
     private List<Employee> employees;
 
     /**
-     * Initializes the controller class. This method is automatically called
-     * after the FXML file has been loaded. It sets up ListView/TableView items,
-     * cell factories for custom display, and loads all initial data.
+     * Initializes the controller class. This method is automatically called after the FXML file has been loaded. It sets up ListView/TableView items, cell factories for custom display, and loads all initial data.
      */
     public void initialize() {
         menuDisplayList = FXCollections.observableArrayList();
@@ -309,8 +309,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Fetches menu items from MenuDAO and populates the menu ListView
-     * and the product analysis ComboBox.
+     * Fetches menu items from MenuDAO and populates the menu ListView and the product analysis ComboBox.
      */
     private void loadMenuData() {
         try {
@@ -366,8 +365,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Fetches daily report summaries from ReportsDAO and populates the
-     * labels on the main dashboard tab.
+     * Fetches daily report summaries from ReportsDAO and populates the labels on the main dashboard tab.
      */
     private void loadReports() {
         try {
@@ -395,8 +393,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Calculates the number of inventory items that are at or below their
-     * red (critical) threshold.
+     * Calculates the number of inventory items that are at or below their red (critical) threshold.
      *
      * @return The count of items at or below the red threshold.
      */
@@ -674,8 +671,7 @@ public class ManagerDashboardSimpleController {
     }
     
     /**
-     * FXML Action: Runs the product sales analysis based on selected
-     * product and date range.
+     * FXML Action: Runs the product sales analysis based on selected product and date range.
      */
     @FXML
     private void onRunProductAnalysis() {
@@ -808,8 +804,7 @@ public class ManagerDashboardSimpleController {
     }
     
     /**
-     * Core logic for generating the Z-Report. Fetches data from ZReportDAO,
-     * populates the Z-Report TableView, and displays a summary alert.
+     * Core logic for generating the Z-Report. Fetches data from ZReportDAO, populates the Z-Report TableView, and displays a summary alert.
      */
     private void generateZReport() {
         try {
@@ -909,8 +904,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Creates a TableCell that formats an Integer and styles the text red
-     * if the value is greater than zero. For XReportEntry.
+     * Creates a TableCell that formats an Integer and styles the text red if the value is greater than zero. For XReportEntry.
      * @return A new TableCell with conditional red styling.
      */
     private TableCell<boba.shop.model.XReportEntry, Integer> createRedOnPositiveCell() {
@@ -934,8 +928,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Creates a TableCell that formats an Integer and styles the text red
-     * if the value is greater than zero. For ZReportEntry.
+     * Creates a TableCell that formats an Integer and styles the text red if the value is greater than zero. For ZReportEntry.
      * @return A new TableCell with conditional red styling.
      */
     private TableCell<boba.shop.model.ZReportEntry, Integer> createRedOnPositiveCellZ() {
@@ -959,8 +952,7 @@ public class ManagerDashboardSimpleController {
     }
 
     /**
-     * Creates a TableCell that formats an Integer and styles the text with
-     * a specific color if the value is greater than zero.
+     * Creates a TableCell that formats an Integer and styles the text with a specific color if the value is greater than zero.
      * @param color The CSS color string (e.g., "red" or "#FF8C00").
      * @return A new TableCell with conditional styling.
      */

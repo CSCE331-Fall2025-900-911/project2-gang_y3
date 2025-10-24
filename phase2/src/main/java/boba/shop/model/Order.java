@@ -4,11 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Represents an order in the Boba Shop system. Each order contains details such
- * as the date, time, total amount, payment method, order status, customer ID,
- * and item information.
+ * Represents an order in the Boba Shop system. Each order contains details such as the date, time, total amount, payment method, order status, customer ID, and item information.
  *
- * @author Sonith
+ * @author Sonith Guduru and Shashvat Chathapuram
  */
 public class Order {
 
@@ -28,8 +26,7 @@ public class Order {
      * @param orderTime the time when the order was placed
      * @param totalAmount the total amount of the order
      * @param paymentMethod the payment method used (e.g., "Cash", "Card")
-     * @param orderStatus the current status of the order (e.g., "Pending",
-     * "Completed")
+     * @param orderStatus the current status of the order (e.g., "Pending", "Completed")
      * @param customerId the ID of the customer who placed the order
      * @param itemLink a reference or link to the ordered item details
      * @param customId a unique identifier assigned to the order

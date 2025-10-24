@@ -4,8 +4,9 @@ import javafx.beans.property.*;
 
 /**
  * Represents a single row of data for an X-Report (hourly sales summary).
- * This class is a JavaFX data model (POJO) that uses JavaFX Properties
- * to allow easy binding with TableView columns.
+ * This class is a JavaFX data model (POJO) that uses JavaFX Properties to allow easy binding with TableView columns.
+ * 
+ * @author Sudeep Sirivella and Shashvat Chathapuram
  */
 public class XReportEntry {
     private final StringProperty hour;

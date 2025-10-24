@@ -1,4 +1,4 @@
-// Sudeep
+
 package boba.shop.database;
 
 import boba.shop.model.MenuItem;
@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data Access Object (DAO) for handling all database operations related to MenuItems.
- * This class provides static methods for CRUD (Create, Read, Update) operations
- * on the 'menu' table.
+ * Data Access Object for handling all database operations related to MenuItems.
+ * This class provides static methods for Create, Read, and Update operations on the 'menu' table.
+ * 
+ * @author Sudeep Sirivella and Shashvat Chathapuram
  */
 public class MenuDAO {
     
@@ -86,8 +87,7 @@ public class MenuDAO {
 
     /**
      * Adds a new menu item to the database.
-     * This method first determines the next available menu_item_id by finding the
-     * current maximum ID and adding 1. The new item is set to 'available' by default.
+     * This method first determines the next available menu_item_id by finding the current maximum ID and adding 1. The new item is set to 'available' by default.
      *
      * @param itemName The name of the new item (e.g., "Classic Milk Tea").
      * @param category The category of the item (e.g., "Milk Teas", "Specials").
