@@ -10,6 +10,7 @@
 module boba.shop {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
     requires transitive java.sql;
     requires transitive javafx.base;
 

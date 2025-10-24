@@ -22,7 +22,7 @@ public class ReportsDAO {
      * Retrieves daily report data, including order count, revenue, popular items, peak hour, low inventory, and total employees.
      *
      * @return a map of report data
-     * @throws SQLException if a database access error occurs
+     * 
      */
     public static Map<String, Object> getDailyReports() {
         Map<String, Object> reports = new HashMap<>();

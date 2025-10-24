@@ -25,7 +25,7 @@ public class EmployeeDAO {
      * Retrieves all employees from the database.
      *
      * @return a list of Employee objects
-     * @throws SQLException if a database access error occurs
+     * 
      */
     public static List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
@@ -62,7 +62,7 @@ public class EmployeeDAO {
      * @param password the employee's password
      * @param role the employee's role
      * @return true if the employee was added successfully, false otherwise
-     * @throws SQLException if a database access error occurs
+     * 
      */
     public static boolean addEmployee(String username, String password, String role) {
         String getMaxIdSql = "SELECT COALESCE(MAX(user_id), 0) + 1 FROM authentication";
@@ -102,7 +102,7 @@ public class EmployeeDAO {
      * @param password the updated password
      * @param role the updated role
      * @return true if the employee was updated successfully, false otherwise
-     * @throws SQLException if a database access error occurs
+     * 
      */
     public static boolean updateEmployee(int userId, String username, String password, String role) {
         String sql = "UPDATE authentication SET username = ?, password = ?, role = ? WHERE user_id = ?";
