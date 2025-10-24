@@ -1,6 +1,8 @@
-// Sashavat
+// Shashvat
+
 
 package boba.shop;
+
 
 import boba.shop.model.DrinkItem;
 import boba.shop.model.MenuItem;
@@ -11,10 +13,18 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+
+/**
+ * Controller for customizing drink options such as sweetness and ice levels.
+ * Handles user selections and adds customized drinks to the order.
+ * @author Shashvat
+ */
 public class CustomizeDrinkController {
+
 
     @FXML
     private Label drinkNameLabel;
+
 
     @FXML
     private RadioButton sweetness0;
@@ -25,6 +35,7 @@ public class CustomizeDrinkController {
     @FXML
     private RadioButton sweetness100;
 
+
     @FXML
     private RadioButton ice0;
     @FXML
@@ -34,11 +45,14 @@ public class CustomizeDrinkController {
     @FXML
     private RadioButton ice100;
 
+
     private ToggleGroup sweetnessGroup;
     private ToggleGroup iceGroup;
     private MenuItem menuItem;
     private OrderManager orderManager;
 
+
+    /** Initializes toggle groups and default selections. */
     public void initialize() {
         orderManager = OrderManager.getInstance();
         sweetnessGroup = new ToggleGroup();
@@ -47,6 +61,8 @@ public class CustomizeDrinkController {
         sweetness50.setToggleGroup(sweetnessGroup);
         sweetness100.setToggleGroup(sweetnessGroup);
         sweetness100.setSelected(true);
+
+
         iceGroup = new ToggleGroup();
         ice0.setToggleGroup(iceGroup);
         ice25.setToggleGroup(iceGroup);
@@ -55,43 +71,58 @@ public class CustomizeDrinkController {
         ice100.setSelected(true);
     }
 
+
+    /**
+     * Sets the selected menu item to customize.
+     * @param menuItem The drink menu item
+     */
     public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
         drinkNameLabel.setText(menuItem.getItemName() + " - $" + String.format("%.2f", menuItem.getPrice()));
     }
+
+
+    /**
+     * Sets the drink name and price manually (used for custom drinks).
+     * @param name Drink name
+     * @param price Drink price
+     */
     public void setDrinkInfo(String name, double price) {
         this.menuItem = new MenuItem(0, name, "", price, true, "");
         drinkNameLabel.setText(name + " - $" + String.format("%.2f", price));
     }
 
+
+    /** Adds the customized drink to the order and closes the window. */
     @FXML
     private void onAddToCart() {
-        if (menuItem == null) {
-            return;
-        }
+        if (menuItem == null) return;
+
 
         RadioButton selectedSweetness = (RadioButton) sweetnessGroup.getSelectedToggle();
         RadioButton selectedIce = (RadioButton) iceGroup.getSelectedToggle();
 
+
         String sweetnessLevel = selectedSweetness.getText();
         String iceLevel = selectedIce.getText();
 
-        DrinkItem newItem = new DrinkItem(
-            menuItem,
-            iceLevel, 
-            sweetnessLevel, 
-            1
-        );
+
+        DrinkItem newItem = new DrinkItem(menuItem, iceLevel, sweetnessLevel, 1);
         orderManager.addItem(newItem);
 
-        // Close the window
+
         Stage stage = (Stage) drinkNameLabel.getScene().getWindow();
         stage.close();
     }
 
+
+    /** Closes the customization window without saving changes. */
     @FXML
     private void onCancel() {
         Stage stage = (Stage) drinkNameLabel.getScene().getWindow();
         stage.close();
     }
 }
+
+
+
